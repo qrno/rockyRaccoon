@@ -4,7 +4,15 @@ body {
 	padding-right: 150px;
 }
 
-
 a {
 	text-decoration: none;
 }
+
+.navbar {
+	background-color: cyan;
+	width: 100%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+}
+
