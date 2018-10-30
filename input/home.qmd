@@ -1,0 +1,6 @@
+EXTENDS base
+
+# Home
+
+Here are all of the posts on this website:
+! LIST

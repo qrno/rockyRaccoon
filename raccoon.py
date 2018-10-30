@@ -11,7 +11,6 @@ for f in inputDir:
         qmdFiles.append(f[:-4])
 
 #Gets and opens all files/
-
 inputFiles = []
 for fileName in qmdFiles:
     fileLocation = 'input/'+fileName+'.qmd'
@@ -19,26 +18,30 @@ for fileName in qmdFiles:
 
 #Parsing
 def parseLine(line):
-    hashCount = 0
-    for char in line:
-        if char == '#':
-            hashCount += 1
-        else:
-            break
-    if hashCount == 1:
+    first = ''
+    if line != '\n':
+        first = line.split()[0]
+
+    if first == '#':
         return (line[1: -1], 'h1')
-    elif hashCount == 2:
+    elif first == '##':
         return (line[2: -1], 'h2')
-    elif hashCount == 3:
+    elif first == '###':
         return (line[3: -1], 'h3')
-    elif line[:6] == 'INSERT':
-        return (line[7: -1], 'insert')
+    elif first == 'EXTENDS':
+        return (line.split()[1], 'extends')
+    elif first == '@':
+        return (line[1: -1], 'comment')
+    elif first == '!':
+        if line.split()[1] == 'LIST':
+            return ('list', 'command')
+    elif first == '=':
+        return (line[1:-1], 'pInit')
     else:
-        return (line[:-1], 'p')
+        return (line[:-1], 'pCont')
 
 #The actual file by file treatment
 for fileNow in inputFiles:
-
     templateFile = []
     out = []
 
@@ -50,6 +53,8 @@ for fileNow in inputFiles:
     for line in rawContent:
         parsedContent.append(parseLine(line))
 
+    pOpen = False
+
     for line in parsedContent:
         content, kind = line
 
@@ -59,17 +64,30 @@ for fileNow in inputFiles:
             out.append('<h2>'+content+'</h2>\n')
         if kind == 'h3':
             out.append('<h3>'+content+'</h3>\n')
-        if kind == 'p':
-            out.append('<p>'+content+'</p>\n')
-        if kind == 'insert':
+        if kind == 'pInit':
+            if not pOpen:
+                out.append('<p>'+content+'\n')
+            else:
+                out.append('</p>\n')
+            pOpen = not pOpen
+        if kind == 'pCont':
+            out.append(content+'\n')
+        if kind == 'extends':
             templateLocation = 'input/templates/'+content+'.html'
             templateFile = open(templateLocation, 'r').readlines()
+        if kind == 'comment':
+            out.append('<!--'+content+'-->')
+        if kind == 'command' and content == 'list':
+            out.append('<ul>')
+            for f in inputFiles:
+                name = f[1]
+                if name != 'home':
+                    out.append('<li><a href="'+name+'.html">'+name+'</a>\n')
+            out.append('</ul')
 
     for line in templateFile:
-        outputFile.write(line)
-        if line == '<!--CONTENT-->\n':
+        if '<!--CONTENT-->' in line:
             for outLine in out:
                 outputFile.write(outLine)
-        if line == '<!--ESSAYS-->\n':
-            for f in qmdFiles:
-                outputFile.write('<a href="'+f+'.html">'+f+'</a>\n')
+            continue
+        outputFile.write(line)

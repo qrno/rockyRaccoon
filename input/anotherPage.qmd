@@ -1,9 +1,0 @@
-INSERT base
-
-#This is another page
-##Is this real life?
-###Is this just fantasy?
-
-Lorem Ipsum Dolor Sit Amet
-Just 'cause you see it, doesn't mean it's there.
-What a wonderful world this would be
