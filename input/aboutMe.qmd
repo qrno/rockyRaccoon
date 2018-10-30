@@ -1,0 +1,7 @@
+INSERT base
+
+#ROCKY RACOON static website generator
+##Welcome to my fake personal website created entirely for demonstrational purposes
+
+###Introduction
+
