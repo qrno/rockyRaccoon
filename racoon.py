@@ -70,3 +70,6 @@ for fileNow in inputFiles:
         if line == '<!--CONTENT-->\n':
             for outLine in out:
                 outputFile.write(outLine)
+        if line == '<!--ESSAYS-->\n':
+            for f in qmdFiles:
+                outputFile.write('<a href="'+f+'.html">'+f+'</a>\n')
