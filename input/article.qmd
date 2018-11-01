@@ -1,4 +1,6 @@
 EXTENDS base
+TITLE Example Article
+TAGS example article
 
 # This seems to be the title of the article
 ## Hence, this must be the subtitle of the article
@@ -16,3 +18,4 @@ This prevents you from having to write super long lines.
 Another article for demonstrative porpuses.
 Lorem Ipsum Dolor Sit Amet.
 3.141592653589793238462643383279650.
+=

@@ -1,4 +1,6 @@
 EXTENDS base
+TITLE Just an example!
+TAGS article example
 
 # This is a title
 ## This is a subtitle
