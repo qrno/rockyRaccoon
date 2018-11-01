@@ -39,7 +39,6 @@ class File:
         stringToRet += 'title: ' + self.title + '\n'
         return stringToRet
 
-
 def getFileExtension(filename):
     for idx, char in enumerate(filename):
         if char == '.':
@@ -69,12 +68,10 @@ def getFirstWord(line):
     else:
         return ''
 
-
 def getLocation(directory, filename):
     if directory[-1:] != '/':
         directory = directory+'/'
     return directory+filename
-
 
 def cut(line, amountStart, amountEnd=0):
     if amountEnd == 0:
