@@ -20,10 +20,10 @@ def getTags(raw):
     return ''
 
 class File:
-    def __init__(self, raw, location, filename):
+    def __init__(self, raw, location, name):
         self.raw = raw
         self.location = location
-        self.filename = filename
+        self.name = name
 
         self.title = getTitle(self.raw)
         self.tags = getTags(self.raw)
@@ -31,7 +31,7 @@ class File:
     def __repr__(self):
         stringToRet = ''
         stringToRet += 'location: ' + self.location + '\n'
-        stringToRet += 'filename: ' + self.filename + '\n'
+        stringToRet += 'name: ' + self.name + '\n'
         stringToRet += 'tags: '
         for tag in self.tags:
             stringToRet += tag + ' '
@@ -82,9 +82,7 @@ files = getFiles(inputDirectoryName, 'qmd')
 
 #Parsing
 def parseLine(line):
-    first = ''
-    if line != '\n':
-        first = line.split()[0]
+    first = getFirstWord(line)
     if first == '#':
         return (line[1: -1], 'h1')
     elif first == '##':
@@ -107,15 +105,65 @@ def convertLine(content, kind):
         return '<h3>'+ content +'</h3>'
     if kind == 'p':
         return '<p>'+ content + '</p>'
+    if kind == 'link':
+        return '<a href='+content+'>'+content+'</a>'
     else:
         return '<!--'+content+'-->'
 
-#The actual file by file treatment
+def getList(fileList, tag='none'):
+    if tag == 'none':
+        return fileList
+
+    desiredFiles = []
+    for f in fileList:
+        if tag in f.tags:
+            desiredFiles.append(f)
+    return desiredFiles
+
+def formatLink(href, inside):
+    return '<a href="'+href+'">'+inside+'</a>'
+
+def formatList(elements, ordered=False):
+    output = ''
+    if ordered:
+        output += '<ol>\n'
+    else:
+        output += '<ul>\n'
+
+    for element in elements:
+        output += '\t<li>'+element+'</li>\n'
+
+    if ordered:
+        output += '</ol>\n'
+    else:
+        output += '</ul>\n'
+         
+    return output
+    
+def getHTML(f):
+    return f.name+'.html'
+
+def prepareLine(line, files):
+    if getFirstWord(line) == 'LIST':
+        return prepareList(files, line.split()[1])
+
+    content, kind = parseLine(line)
+    convertedLine = convertLine(content, kind)
+    return convertedLine + '\n'
+
+def prepareList(files, tag):
+    fileList = getList(files, tag)
+    formattedFileList = []
+    for f in fileList:
+        formattedFileList.append(formatLink(getHTML(f), f.title))
+    return formatList(formattedFileList)
+    
 for fileNow in files:
-    outLocation = getLocation(outputDirectoryName, fileNow.filename) + '.html'
-    out = open(outLocation, 'w')
+    outLocation = getLocation(outputDirectoryName, fileNow.name) + '.html'
+    outString = ''
+
     for line in fileNow.raw:
-        content, kind = parseLine(line)
-        convertedLine = convertLine(content, kind)
-        print(convertedLine)
-        out.write(convertedLine+'\n')
+        outString += prepareLine(line, files)
+
+    outFile = open(outLocation, 'w')
+    outFile.write(outString)
