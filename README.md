@@ -1,24 +1,18 @@
 # Rocky Raccoon
 ## A static website generator in Python 3.
 
-# Can do:
+# Usage:
+~to-do~
 
-Headings 1, 2, 3
+### Can do:
+ - Headings 1, 2, 3
+ - Templates
+ - Tags
+ - Comments
+ - Title
+ - Paragraphs
 
-Templates
-
-Tags
-
-Lists
-
-Comments
-
-Title
-
-Paragraphs
-
-# Will be able to do:
-
-Links
-
-Images
+### Coming Soon:
+ - Links
+ - Images
+ - Lists
