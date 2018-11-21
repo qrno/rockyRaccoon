@@ -1,0 +1,20 @@
+EXTENDS base
+TITLE Harry Potter
+TAGS review book
+
+# Harry Potter 
+
+## 6/10
+
+=
+Nowadays it is really hard to find someone who hasn't heard of Harry Potter.
+The series first book is just behind the Bible as the most sold book of all time.
+The fantasy series is about a young boy who discovers he's a wizard and is invited to
+study in the Hogwarts Wizard School.
+=
+=
+He discovers, among other things, that his parents were actually murdered by an evil wizard,
+Lord Voldemort, and not killed in a car crash as he'd been told...
+The books show us the time Harry spends at Hogwarts, the friendships he makes and the
+challenges he faces.
+=

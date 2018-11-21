@@ -15,6 +15,7 @@ getList(fileList, tag='none')
 formatLink(href, text)
 formatList(elements, ordered=False)
 '''
+
 def parseLine(line):
     first = getFirstWord(line)
     if first == '#':
@@ -25,12 +26,14 @@ def parseLine(line):
         return (line[3: -1], 'h3')
     elif first == '@':
         return (line[1: -1], 'comment')
+    elif first == '=':
+        return (line,'p')
     elif first in reservedWords:
-        return ('', 'comment')
+        return (line, 'comment')
     else:
-        return (line[:-1], 'p')
+        return (line, 'none')
 
-def convertLine(content, kind):
+def convertLine(content, kind, pOpen):
     if kind == 'h1':
         return '<h1>'+ content +'</h1>'
     if kind == 'h2':
@@ -38,31 +41,21 @@ def convertLine(content, kind):
     if kind == 'h3':
         return '<h3>'+ content +'</h3>'
     if kind == 'p':
-        return '<p>'+ content + '</p>'
-    if kind == 'link':
-        return '<a href='+content+'>'+content+'</a>'
-    else:
+        if (not pOpen):
+            return '<p>'
+        else:
+            return '</p>'
+    if kind == 'comment':
         return '<!--'+content+'-->'
+    else:
+        return content
 
-def prepareLine(line, files):
+def prepareLine(line, pOpen):
     if getFirstWord(line) == 'LIST':
-        return prepareList(files, line.split()[1])
-
+        listName = cut(line, len('LIST')+1, 1)
+        listElements = getList(files, listName)
+        listHTML = formatList(listElements)
+        return listHTML
     content, kind = parseLine(line)
-    convertedLine = convertLine(content, kind)
+    convertedLine = convertLine(content, kind, pOpen)
     return convertedLine + '\n'
-
-def prepareList(files, tag):
-    fileList = getList(files, tag)
-    formattedFileList = []
-    for f in fileList:
-        formattedFileList.append(formatLink(f.name+'.html', f.title))
-    return formatList(formattedFileList)
-
-def getPackets(raw):
-    packets = []
-
-    pOpen = False
-    packet = ('','')
-    for line in raw:
-        pass

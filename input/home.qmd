@@ -1,9 +1,0 @@
-EXTENDS base
-TITLE Homepage of the blog
-TAGS home page
-
-# Home
-
-Here are all of the posts on this website:
-
-LIST article

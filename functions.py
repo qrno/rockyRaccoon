@@ -1,4 +1,5 @@
 import os
+import io
 
 inputDirectoryName = 'input'
 outputDirectoryName = 'output'
@@ -8,7 +9,7 @@ reservedWords = ['TITLE', 'TAGS', 'EXTENDS', 'IMAGE', 'LIST']
 def getTitle(raw):
     for line in raw:
         if getFirstWord(line) == 'TITLE':
-            return cut(line, len('TITLE'), 1)
+            return cut(line, len('TITLE')+1, 1)
     return ''
 
 def getTags(raw):
@@ -16,6 +17,13 @@ def getTags(raw):
     for line in raw:
         if getFirstWord(line) == 'TAGS':
             return line.split()[1:]
+    return ''
+
+def getTemplate(raw):
+    template = ''
+    for line in raw:
+        if getFirstWord(line) == 'EXTENDS':
+            return cut(line, len('EXTENDS')+1, 1)
     return ''
 
 class File:
@@ -26,16 +34,18 @@ class File:
 
         self.title = getTitle(self.raw)
         self.tags = getTags(self.raw)
+        self.template = getTemplate(self.raw)
 
     def __repr__(self):
-        stringToRet = ''
-        stringToRet += 'location: ' + self.location + '\n'
-        stringToRet += 'name: ' + self.name + '\n'
-        stringToRet += 'tags: '
+        stringToRet = '\n'
+        stringToRet += 'location:' + self.location + '\n'
+        stringToRet += 'name:' + self.name + '\n'
+        stringToRet += 'tags:'
         for tag in self.tags:
             stringToRet += tag + ' '
         stringToRet += '\n'
-        stringToRet += 'title: ' + self.title + '\n'
+        stringToRet += 'title:' + self.title + '\n'
+        stringToRet += 'template:' + self.template + '\n'
         return stringToRet
 
 def getFileExtension(filename):
@@ -55,7 +65,7 @@ def getFiles(directory, fileExtension):
     for filename in files:
         if getFileExtension(filename) == fileExtension:
             location = getLocation(directory, filename)
-            content = open(location, 'r').readlines()
+            content = io.open(location, mode='r', encoding='utf-8').readlines()
             f = File(content, location, cutExtension(filename))
             fileList.append(f)
     return fileList
@@ -99,7 +109,8 @@ def formatList(elements, ordered=False):
         output += '<ul>\n'
 
     for element in elements:
-        output += '\t<li>'+element+'</li>\n'
+        content = formatLink(element.name+'.html', element.title)
+        output += '\t<li>'+content+'</li>\n'
 
     if ordered:
         output += '</ol>\n'
@@ -109,5 +120,5 @@ def formatList(elements, ordered=False):
     return output
 
 
-def formatLink(href, text):
+def formatLink(href, text='(link)'):
     return '<a href="'+href+'">'+text+'</a>'

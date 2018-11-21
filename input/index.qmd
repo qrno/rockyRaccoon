@@ -1,0 +1,15 @@
+EXTENDS base
+TITLE Homepage of the blog
+TAGS homepage
+
+# Home
+Here are listed all of the posts of the website
+
+## Music
+LIST music
+
+## Reviews
+LIST review
+
+## Notes
+LIST notes
