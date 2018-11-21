@@ -4,12 +4,21 @@
 # Can do:
 
 Headings 1, 2, 3
+
 Templates
+
 Tags
+
 Lists
+
 Comments
+
+Title
+
+Paragraphs
 
 # Will be able to do:
 
-Title
-Paragraphs
+Links
+
+Images
