@@ -28,6 +28,8 @@ def parseLine(line):
         return (line[1: -1], 'comment')
     elif first == '=':
         return (line,'p')
+    elif first == 'IMAGE':
+        return (line[len('IMAGE'):-1], 'image')
     elif first in reservedWords:
         return (line, 'comment')
     else:
@@ -47,6 +49,8 @@ def convertLine(content, kind, pOpen):
             return '</p>'
     if kind == 'comment':
         return '<!--'+content+'-->'
+    if kind == 'image':
+        return '<img src="'+content+'">'
     else:
         return content
 

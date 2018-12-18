@@ -1,8 +1,8 @@
 import os
 import io
 
-inputDirectoryName = 'input'
-outputDirectoryName = 'output'
+inputDirectoryName = '../input'
+outputDirectoryName = '../output'
 fileExtensionName = 'qmd'
 reservedWords = ['TITLE', 'TAGS', 'EXTENDS', 'IMAGE', 'LIST']
 

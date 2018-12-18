@@ -2,19 +2,23 @@ body {
 	font-family: "Roboto";
 	padding-left: 150px;
 	padding-right: 150px;
-	background-color: #FFDA86;
+	background-color: #ffffff;
+	color: #000000;
 }
 
 a:link, a:visited, a:hover, a:active {
 	text-decoration: none;
-	color: #000000;
+	color: #0500FF;
+}
+
+.site-title {
+	color: #ffffff;
 }
 
 .navbar {
-	background-color: #FF4D4D;
+	background-color: #0500FF;
 	width: 100%;
 	padding-top: 50px;
 	padding-bottom: 50px;
 	text-align: center;
 }
-

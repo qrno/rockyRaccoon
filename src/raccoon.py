@@ -6,7 +6,7 @@ for fileNow in files:
     for line in fileNow.raw:
         outString += prepareLine(line, pOpen)
         first = getFirstWord(line)
-    templateLocation = 'input/templates/'+fileNow.template+'.html'
+    templateLocation = inputDirectoryName + '/templates/'+fileNow.template+'.html'
     templateContent = io.open(templateLocation, mode='r', encoding='utf-8').readlines()
 
     newString = ''
