@@ -11,7 +11,7 @@ A better version of Rocky Raccoon is being created and should be published here 
 
 Clone this repo.
 Criate or edit templates in the input/templates folder.
-The template can be any piece of HTML, and should have '<!--TITLE-->' and '<!--CONTENT-->' where the title and content of the article should be respectively.
+The template can be any piece of HTML, and should have \<!--TITLE--> and \<!--CONTENT--> where the title and content of the article should be respectively.
 
 Create a file with of .qmd filetype with the following structure:
 
