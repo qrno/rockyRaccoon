@@ -1,6 +1,18 @@
-# This is the title
-@ This is a comment
+EXTENDS base
+TITLE Homepage of this blog
+TAGS homepage
 
-## This is a subtitle
+# This website was created using Rocky Raccoon
 
-This is just common text
+Rocky Raccoon is a static website generator, which attempts to make it easier to create simple web pages, such as personal blogs and online portifolios.
+
+The idea is that you build upon the code found <a href="github.com/qrno/rockyracoon">here</a> in order to adapt the tool to your needs and preferences.
+
+# Features
+
+Rocky Raccoon's language is like Markdown, easy and intuitive to use. If you want to make a title you just need to put a '#' in the beginning of the line. A subtitle? '##'. And for regular text you just write normally.
+
+Another thing that Rocky Raccoon implements is templates. A template is like a general theme that you want your site to have. Have you ever noticed that in every page of a site that are always some permanent elements to the design? Look at <a href="example2.html">this</a> other page for instance.
+
+
+It is also very extensible. Let's say you want to implement this feature: if the first word of the line is "LINK", create a link where the next word is the address and all the others are the link text. Because of RR's simplicity, it only takes adding two lines to the parse.py file to do that.

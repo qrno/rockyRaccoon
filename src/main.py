@@ -1,15 +1,14 @@
 import io
 from load import *
 from parse import *
+from render import *
 
+files = getFiles(inputDir, fileExtension)
 for file in files:
-
-    html = ''
-
-    for line in file.raw:
-        html += prepare(line)
-
     outLocation = outputDir + file.name + '.html'
+    templateName = file.template + '.html'
+
     outFile = io.open(outLocation, mode='w', encoding='utf-8')
 
-    outFile.write(html)
+    outFile.write(render(templateDir+templateName,file))
+

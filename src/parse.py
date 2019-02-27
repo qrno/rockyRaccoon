@@ -4,8 +4,11 @@ templates = {
     'h1'    : '<h1>\E0</h1>',
     'h2'    : '<h2>\E0</h2>',
     'p'     : '<p>\E0</p>',
-    'com'   : '<!--\E0-->'
+    'com'   : '<!--\E0-->',
+    'nothing' : ''
 }
+
+reservedWords = ['TITLE', 'TAGS', 'EXTENDS']
 
 def parse(line):
     first = getWord(line)
@@ -17,15 +20,15 @@ def parse(line):
         return [rest], 'h2'
     if first == '@':
         return [rest], 'com'
-    
+    if first in reservedWords:
+        return [], 'nothing'
+
     return [line], 'p'
 
-def transform(elements, type):
-    templ = templates[type]
-    for i in range(len(elements)):
-        templ = templ.replace('\E'+str(i), elements[i])
-    return templ
-
-def prepare(line):
+def transform(line):
     elements, type = parse(line)
-    return transform(elements, type)
+
+    parsed = templates[type]
+    for i in range(len(elements)):
+        parsed = parsed.replace('\E'+str(i), elements[i])
+    return parsed

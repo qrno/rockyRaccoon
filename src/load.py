@@ -1,10 +1,11 @@
 import os
 
 from fun import *
-from file import File
+from file import *
 
 inputDir = '../input/'
 outputDir = '../output/'
+templateDir = inputDir + 'templates/'
 fileExtension = 'qmd'
 
 def getFiles(dir, ext):
@@ -19,7 +20,6 @@ def getFiles(dir, ext):
             file = File(location)
 
             files.append(file)
+    print("Loaded Files: ")
+    print(files)
     return files
-
-files = getFiles(inputDir, fileExtension)
-print(files)
