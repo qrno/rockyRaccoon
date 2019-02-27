@@ -1,5 +1,30 @@
 body {
+<<<<<<< HEAD
 	margin-left: 20%;
 	margin-right: 20%;
 	font-size: 16pt;
+=======
+	font-family: "Roboto";
+	padding-left: 150px;
+	padding-right: 150px;
+	background-color: #ffffff;
+	color: #000000;
+}
+
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+	color: #0500FF;
+}
+
+.site-title {
+	color: #ffffff;
+}
+
+.navbar {
+	background-color: #0500FF;
+	width: 100%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+>>>>>>> b6abcab1a5cd0a604d06ec634f5f6a5e49ef85f2
 }

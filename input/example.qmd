@@ -6,7 +6,7 @@ TAGS homepage
 
 Rocky Raccoon is a static website generator, which attempts to make it easier to create simple web pages, such as personal blogs and online portifolios.
 
-The idea is that you build upon the code found <a href="github.com/qrno/rockyracoon">here</a> in order to adapt the tool to your needs and preferences.
+The idea is that you build upon the code found <a href="github.com/qrno/rockyracoon2">here</a> in order to adapt the tool to your needs and preferences.
 
 # Features
 

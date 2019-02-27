@@ -1,0 +1,3 @@
+EXTENDS base
+TITLE Homepage of the blog
+TAGS homepage
